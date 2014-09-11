@@ -36,6 +36,10 @@ User.methods.encryptPassword = function(password) {
     return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
 };
 
+User.statics.encryptPassword = function(password, salt) {
+    return crypto.createHmac('sha1', salt).update(password).digest('hex');
+}
+
 User.methods.checkPassword = function (password) {
     return this.encryptPassword(password) === this.hashedPassword;
 };

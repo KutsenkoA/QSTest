@@ -34,17 +34,19 @@ app.post('/login', function(req, res, next) {
 	    return next(err);
 	}
 
-	console.log(data, req.body);
-
 	if (data && data.checkPassword(req.body.password)) {
-	    console.log('auth ok');
 	    req.session.user = data._id;
+	    req.session.username = data.name;
 	    res.redirect('/');
 	} else {
-	    console.log('auth error');
 	    return next(err);
 	}
     });
+});
+
+app.post('/logout', function(req, res, next) {
+    req.session.destroy();
+    res.redirect('/');
 });
 
 // Check autorization
@@ -59,7 +61,9 @@ app.use(function(req, res, next) {
 
 // Get the index
 app.get('/', function(req, res, next) {
-    res.render('index');
+    res.render('index', {
+	username: req.session.username
+    });
 });
 
 // Get one user data
@@ -110,7 +114,9 @@ app.post('/user/:id', function(req, res, next) {
 	};
 
 	if (req.body.password) {
-	    set.password = req.body.password;
+	    var salt = Math.random() + '';
+	    set.hashedPassword = user.encryptPassword(req.body.password, salt);
+	    set.salt = salt;
 	}
 
 	user.update({
