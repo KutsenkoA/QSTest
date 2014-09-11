@@ -1,0 +1,23 @@
+.mycont {
+    border: 1px solid darkgray;
+    margin-top: 40px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 7px black;
+    background: whitesmoke;
+}
+body {
+    background-color: #206f9c;
+}
+.listhd {
+    background: lavender;
+    border: 1px solid lightgray;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+.lhspan {
+    vertical-align: middle;
+}
+.rhspan {
+    padding-top: 4px;
+}

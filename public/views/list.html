@@ -1,0 +1,22 @@
+<div class="listhd">
+    <span class="h3 lhspan">Список пользователей</span> 
+    <a href="#/new" class="btn btn-primary">Добавить</a>
+    <span class="pull-right rhspan">Фильтр <input ng-model="filterStr" class="search-query"></span>
+</div>
+<div>
+    <table class="table table-stripped">
+	<thead>
+	    <tr>
+		<th ng-repeat="head in tablehead">{{head.title}}</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <tr ng-repeat="user in users | filter:filterStr">
+		<td>{{user.id}}</td>
+		<td><a href="#/user/{{user.id}}">{{user.name}}</a></td>
+		<td>{{user.login}}</td>
+	    </tr>
+	</tbody>
+    </table>
+</div>
+
