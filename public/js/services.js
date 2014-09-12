@@ -10,6 +10,10 @@ angular.module('QSTest.services', ['ngResource'])
 		else
 		    return $http.get('/user/' + params.id);
 	    },
+	    newUser: function(params) {
+		console.log(params);
+		return $http.post('/user', params);
+	    },
 	    put: function(params) {
 		return $http.post('/user/' + params.id, params);
 	    },

@@ -18,6 +18,14 @@ function UserCtrl($scope, $routeParams, $location, Users) {
 	$scope.user = res.data;
     });
 
+    $scope.newUser = function() {
+	console.log('new user', $scope.user);
+	Users.newUser($scope.user)
+	    .then(function() {
+		$location.path('/list');
+	    });
+    };
+
     $scope.updateUser = function() {
 	Users.put($scope.user)
 	    .then(function() {

@@ -6,7 +6,7 @@ angular.module('QSTest', ['ngRoute', 'QSTest.services'])
           $routeProvider
             .when('/list', {templateUrl: 'views/list.html', controller: ListCtrl})
             .when('/user/:id', {templateUrl: 'views/user.html', controller: UserCtrl})
-	    .when('/new', {templateUrl: 'views/new.html'})
+	    .when('/new', {templateUrl: 'views/new.html', controller: UserCtrl})
             .otherwise({redirectTo: '/list'});
     }
 ]);
