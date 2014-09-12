@@ -69,14 +69,22 @@ app.get('/', function(req, res, next) {
 // Get one user data
 app.get('/user/:id', function(req, res, next) {
     user.findOne(req.params, function(err, data) {
-	res.send(data);
+	if (err) {
+	    next(err);
+	} else {
+	    res.send(data);
+	}
     });
 });
 
 // Get users list
 app.get('/users', function(req, res, next) {
     user.find(function(err, data) {
-	res.send(data);
+	if (err) {
+	    next(err);
+	} else {
+	    res.send(data);
+	}
     });
 });
 
@@ -85,8 +93,12 @@ app.post('/user', function(req, res, next) {
 
     var user = new mongoose.models.User(req.body);
 
-    user.save(function() {
-	res.render('index');
+    user.save(function(err) {
+	if (err) {
+	    next(err);
+	} else {
+	    res.render('index');
+	}
     });
 });
 
@@ -100,7 +112,7 @@ app.post('/user/:id', function(req, res, next) {
 	},
 	function(err) {
 	    if (err) {
-		console.log(err);
+		next(err);
 	    } else {
 		res.send('ok');
 	    }
@@ -127,7 +139,7 @@ app.post('/user/:id', function(req, res, next) {
 	}, 
 	function(err) {
 	    if (err) {
-		console.log(err);
+		next(err);
 	    } else {
 		res.send('ok');
 	    }
@@ -135,6 +147,11 @@ app.post('/user/:id', function(req, res, next) {
     }
 });
 
+// Обработка ошибок
+app.use(function(err, req, res, next) {
+    console.log(err);
+    res.status(500).end();
+});
 
 app.listen(app.get('port'), 
 	function() {
