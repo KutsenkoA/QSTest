@@ -24,15 +24,17 @@ html(lang="ru", ng-app="QSTest")
       .row
         .col-lg-3
         .col-lg-6
-          h3 Вход
-          form(method="POST", action="/login")
+          h3 Регистрация нового пользователя
+          form(method="POST", action="/newuser")
+            .form-group
+              label(for="name") Имя пользователя:
+              input(name="name" class="form-control" type="text" placeholder="Введите имя пользователя" required)
             .form-group
               label(for="login") Логин:
-              input(name="login" class="form-control" type="text" placeholder="Введите логин")
+              input(name="login" class="form-control" type="text" placeholder="Введите логин" required)
             .form-group
               label(for="password") Пароль:
-              input(name="password" class="form-control" type="password" placeholder="Введите пароль")
-            button(type="submit" class="btn btn-success") Войти
-            <span class='rspan'><a href="/register">Регистрация</a></span>
+              input(name="password" class="form-control" type="password" placeholder="Введите пароль" required)
+            button(type="submit" class="btn btn-success") Регистрация
         .col-lg-3
 

@@ -49,6 +49,27 @@ app.post('/logout', function(req, res, next) {
     res.redirect('/');
 });
 
+app.get('/register', function(req, res, next) {
+    res.render('register');
+});
+
+app.post('/newuser', function(req, res, next) {
+
+    var user = new mongoose.models.User(req.body);
+
+    user.save(function(err) {
+	if (err) {
+	    console.log(err);
+	    // TODO Выводить userfrendly код ошибки
+	    res.render('regerror', {});
+	} else {
+	    req.session.user = user._id;
+	    req.session.username = user.name;
+	    res.redirect('/');
+	}
+    });
+});
+
 // Check autorization
 app.use(function(req, res, next) {
     if (!req.session.user) {
